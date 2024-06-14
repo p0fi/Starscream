@@ -32,15 +32,15 @@ let package = Package(
             .target(name: "Starscream",
                     path: "Sources",
                     resources: [.copy("PrivacyInfo.xcprivacy")]
-            ),
-            .systemLibrary(
-            name: "CZLib",
-            pkgConfig: "zlib",
-            providers: [
-                .apt(["zlib1g-dev"]),
-                .brew(["zlib"])
-        ]
             )
+            .target(
+                name: "Starscream",
+                dependencies: ["CZlib"],
+                path: "Sources"),
+            .target(
+                name: "CZlib",
+                path: "CZlib",
+                linkerSettings: [ .linkedLibrary("z") ])
             ]
 )
 
