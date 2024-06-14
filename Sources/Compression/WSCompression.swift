@@ -27,11 +27,8 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 import Foundation
-#if os(Linux)
 import CZLib
-#else
-import zlib
-#endif
+
 
 
 public class WSCompression: CompressionHandler {
