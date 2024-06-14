@@ -27,7 +27,12 @@
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 import Foundation
+#if os(Linux)
+import CZLib
+#else
 import zlib
+#endif
+
 
 public class WSCompression: CompressionHandler {
     let headerWSExtensionName = "Sec-WebSocket-Extensions"
@@ -35,11 +40,11 @@ public class WSCompression: CompressionHandler {
     var compressor: Compressor?
     var decompressorTakeOver = false
     var compressorTakeOver = false
-    
+
     public init() {
-        
+
     }
-    
+
     public func load(headers: [String: String]) {
         guard let extensionHeader = headers[headerWSExtensionName] else { return }
         decompressorTakeOver = false
@@ -48,7 +53,7 @@ public class WSCompression: CompressionHandler {
         // assume defaults unless the headers say otherwise
         compressor = Compressor(windowBits: 15)
         decompressor = Decompressor(windowBits: 15)
-        
+
         let parts = extensionHeader.components(separatedBy: ";")
         for p in parts {
             let part = p.trimmingCharacters(in: .whitespaces)
@@ -69,7 +74,7 @@ public class WSCompression: CompressionHandler {
             }
         }
     }
-    
+
     public func decompress(data: Data, isFinal: Bool) -> Data? {
         guard let decompressor = decompressor else { return nil }
         do {
@@ -83,7 +88,7 @@ public class WSCompression: CompressionHandler {
         }
         return nil
     }
-    
+
     public func compress(data: Data) -> Data? {
         guard let compressor = compressor else { return nil }
         do {
@@ -97,7 +102,7 @@ public class WSCompression: CompressionHandler {
         }
         return nil
     }
-    
+
 
 }
 
