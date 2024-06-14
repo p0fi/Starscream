@@ -40,6 +40,8 @@ let package = Package(
                 .apt(["zlib1g-dev"]),
                 .brew(["zlib"])
         ]
+            )
+            ]
 )
 
 #if os(Linux)
