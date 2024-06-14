@@ -32,7 +32,7 @@ let package = Package(
             .target(name: "Starscream",
                     path: "Sources",
                     resources: [.copy("PrivacyInfo.xcprivacy")]
-            )
+            ),
             .target(
                 name: "Starscream",
                 dependencies: ["CZlib"],
