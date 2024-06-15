@@ -43,5 +43,5 @@ let package = Package(
 
 #if os(Linux)
     package.dependencies.append(.package(url: "https://github.com/apple/swift-crypto.git", "1.0.0" ..< "4.0.0"))
-    package.targets[0].dependencies.append("Crypto")
+    package.targets[0].dependencies.append(name: "Crypto", package: "swift-crypto")
 #endif
